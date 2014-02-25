@@ -3,20 +3,34 @@ var http = require('http');
 var fs = require('fs'); //file string module
 //creating a server
 server = http.createServer(function (request, response){
-  response.writeHead(200, {'Content-type': 'text/html'});
   console.log('Request', request.url);
   if(request.url === '/'){
-    fs.readFile('views/cars.html', 'utf8', function (errors, contents){
+    response.writeHead(200, {'Content-type': 'text/html'});
+    fs.readFile('views/index.html', 'utf8', function (errors, contents){
       response.write(contents); 
       response.end();
     });
-  } else if(request.url === '/dojo.html'){
-    fs.readFile('views/dojo.html', 'utf8', function (errors, contents){
+  } else if(request.url === '/cars'){
+    response.writeHead(200, {'Content-type': 'text/html'});
+    fs.readFile('views/cars.html', 'utf8', function (errors, contents){
       response.write(contents);
       response.end();
     });
-  } else if(request.url === '/cats.html'){
+  } else if(request.url === '/cats'){
+    response.writeHead(200, {'Content-type': 'text/html'});
     fs.readFile('views/cats.html', 'utf8', function (errors, contents){
+      response.write(contents);
+      response.end();
+    });
+  } else if(request.url === '/stylesheet/style.css'){
+    response.writeHead(200, {'Content-type': 'text/css'});
+    fs.readFile('stylesheet/style.css', 'utf8', function (errors, contents){
+      response.write(contents);
+      response.end();
+    });
+  } else if(request.url === '/stylesheet/cat.jpg'){
+    response.writeHead(200, {'Content-type': 'image/jpeg'});
+    fs.readFile('/stylesheet/cat.jpg', 'image/jpeg', function (errors, contents){
       response.write(contents);
       response.end();
     });
